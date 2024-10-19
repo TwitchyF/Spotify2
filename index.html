@@ -49,18 +49,7 @@
 </head>
 <body class="bg-gray-200">
 
-  <!-- Captcha Model -->
-  <div id="captchaModal" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center modal-enter modal-leave">
-    <div class="bg-white p-8 rounded-lg relative w-full max-w-sm dark:bg-gray-700 transition-transform transform scale-100">
-      <h5 class="text-lg font-bold mb-4">Verivikasi Captcha Terlebih Dahulu</h5>
-      <div class="flex items-center justify-center mb-4">
-        <canvas id="captchaCanvas" width="200" height="50" class="border"></canvas>
-        <button onclick="generateCaptcha()" class="ml-4 text-blue-500 hover:underline transition duration-300 transform hover:scale-105">Refresh</button>
-      </div>
-      <input type="text" id="captchaInput" placeholder="Masukkan Captcha" class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-700 dark:text-white input-effect mb-4">
-      <button onclick="validateCaptcha()" class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 transition duration-300 transform hover:scale-105">Verivikasi</button>
-    </div>
-  </div> 
+ 
 
   <div id="container" class="hidden">
     <div class="container mx-auto py-10">
@@ -140,34 +129,7 @@
       const itemsPerPage = 5;
       let currentPage = 1;
       let isDarkTheme = false;
-      let captchaCode;
-
-      function generateCaptcha() {
-        const canvas = document.getElementById('captchaCanvas');
-        const context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-        captchaCode = Math.random().toString(36).substring(2, 8);
-        context.font = '30px Arial';
-        context.fillStyle = '#000';
-        context.fillText(captchaCode, 50, 35);
-      }
-
-      function validateCaptcha() {
-        const userInput = document.getElementById('captchaInput').value;
-        if (userInput === captchaCode) {
-          document.getElementById('captchaModal').classList.add('hidden');
-          document.getElementById('container').classList.remove('hidden');
-        } else {
-          alert('invalid');
-          generateCaptcha();
-        }
-      }
-
-      document.addEventListener('DOMContentLoaded', function() {
-        generateCaptcha();
-        document.getElementById('captchaModal').classList.remove('hidden');
-      });
+      
 
       document.getElementById('themeToggle').addEventListener('click', () => {
         isDarkTheme = !isDarkTheme;
@@ -414,25 +376,10 @@
 
       displayFavorites();
 
-      function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-        return null;
-      }
+    
 
       function getRandomText() {
         return 'user-' + Math.floor(Math.random() * 100000);
-      }
-
-      function setRandomTextCookie(randomText) {
-        document.cookie = `username=${randomText}; path=/`;
-      }
-
-      window.onload = function () {
-        if (!getCookie('username')) {
-          setRandomTextCookie(getRandomText());
-        }
       }
     </script>
   </div>
